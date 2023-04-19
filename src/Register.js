@@ -13,9 +13,9 @@ const START_TRIP = 'dataFromSensor'
 const Register = () => {
 
 
-    const [test, setTest] = useState("");
+    const [isTravel, setisTravel] = useState("");
 
-    const [movies, setMovies] = useState([]);
+    const [Locations, setFileLocations] = useState([]);
 
     const [callServer, setCallServer] = useState({});
 
@@ -27,12 +27,12 @@ const Register = () => {
     useEffect(
         () => {
             if (clickEndTravel) {
-                return stopCallServer();
+                 stopCallServer();
             }
-            if (clickEndTravel === false && movies.length) {
-                return sendToServer(movies)
+            if (clickEndTravel === false && Locations.length) {
+                 sendToServer(Locations)
             }
-        }, [test])
+        }, [isTravel])
 
 
     const errRef = useRef();
@@ -57,8 +57,10 @@ const Register = () => {
                 const sheets = wb.SheetNames;
                 if (sheets.length) {
                     const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
-                    setMovies(rows);
+                    setFileLocations(rows);
+                    //$event.target.value = null;
                 }
+                //$event.target.value = null;
             }
             reader.readAsArrayBuffer(file);
         }
@@ -68,6 +70,9 @@ const Register = () => {
     function stopCallServer() {
         clearInterval(callServer);
         setSuccess(false);
+        setisTravel("");
+        setFileLocations([]);
+        setTripId(0);
         return sendPostToEndTrip();
     }
 
@@ -185,13 +190,13 @@ const Register = () => {
                                             />
                                         </div>
                                     </div>
-                                    {movies.length ?
+                                    {Locations.length ?
                                         <footer>
-                                            <h1>{test}</h1>
+                                            <h1>{isTravel}</h1>
                                             <button
                                                 onClick={() => {
                                                     setClickEndTravel(false);
-                                                    setTest("Travel start!");
+                                                    setisTravel("Travel start!");
                                                 }}
                                                 style={{
                                                     position: 'absolute',
@@ -205,7 +210,7 @@ const Register = () => {
                                             <button
                                                 onClick={() => {
                                                     setClickEndTravel(true);
-                                                    setTest("Travel end!");
+                                                    setisTravel("Travel end!");
                                                 }}
                                                 style={{
                                                     position: 'absolute',

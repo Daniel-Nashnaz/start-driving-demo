@@ -94,7 +94,7 @@ export class RandomData {
     getCollisionWarning(directions) {
         //if the direction is not 'Good'
         if (directions !== this.#arr[0]) {
-            if (random.float() > 0.75) {
+            if (random.float() > 0.68) {
                 return Number(random.float(0, 3).toFixed(3));
             }
         }
