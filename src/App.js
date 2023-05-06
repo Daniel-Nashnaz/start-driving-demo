@@ -1,5 +1,5 @@
 import React from 'react';
-import Register from './Register';
+import Register from './RegisterToSensor';
 
 function App() {
 

@@ -83,7 +83,7 @@ export class RandomData {
     }
 
     getLaneDepartureWarning() {
-        if (random.float() < 0.65) {
+        if (random.float() < 0.70) {
             return this.#arr[0];
         }
         return this.#arr[random.int(1, (this.#arr.length - 2))];
@@ -127,7 +127,7 @@ export class RandomData {
     }
 
     isSuddenBraking() {
-        if (random.float() > 0.75) {
+        if (random.float() > 0.85) {
             return random.boolean();
         }
         return false;
